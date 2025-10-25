@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.test;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.samples.petclinic.vet.Vet;
 import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,11 @@ public class TestController {
     @GetMapping("/test/vets")
     public Collection<Vet> vets() {
         return this.vets.findAll();
+    }
+
+    @GetMapping("/test/vets/paginated")
+    public Page<Vet> vetsPaginated(Pageable pageable) {
+        return this.vets.findAll(pageable);
     }
 
     @PostMapping("/test/generate-vets")
